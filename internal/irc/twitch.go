@@ -27,8 +27,8 @@ type Channels struct {
 
 func init() {
 	Bot.Cred.IsAuth = true
-	Bot.Cred.User = "mancert"
-	Bot.Cred.Token = "oauth:9y7q7c9xffmpgs63ue1e7klcv4z4wl"
+	Bot.Cred.User = ""
+	Bot.Cred.Token = ""
 	Bot.Chan = []string{
 		"mancert",
 		"icelandicice",
