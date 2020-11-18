@@ -7,7 +7,7 @@ import (
 	"syscall"
 	"twitchChatRelay/internal/irc"
 
-	_ "twitchchatrelay/routers"
+	_ "twitchChatRelay/routers"
 
 	"github.com/astaxie/beego"
 )
@@ -19,9 +19,16 @@ func init() {
 		<-c
 		os.Exit(0)
 	}()
+	err := irc.ReadConfigFile()
+	if err != nil {
+		panic(err)
+	}
 }
 
 func main() {
+	for name, file := range Assets.Files {
+		fmt.Println(name, file)
+	}
 	fmt.Println("Starting Webserver at :11000")
 	go func() {
 		beego.Run()

@@ -10,7 +10,7 @@
 <body>
     <div class="container">
         <h2>Chat Log:</h2>
-        <div class="form-row">
+        <div class="row border-bottom">
             <div class="col-sm-2">
                 <b>Channel:</b>
             </div>
@@ -23,14 +23,14 @@
         </div>
         {{$lenght := len .messages}}
         {{if eq $lenght 0}}
-            <div class="form-row">
+            <div class="row border-bottom">
                 <div class="col-sm">
-                    Noone typed anything yet!!
+                    Nobody typed anything yet!!
                 </div>
             </div>
             {{else}}
             {{range $value := .messages}}
-            <div class="form-row">
+            <div class="row border-bottom">
                 <div class="col-sm-2">
                     <a href="https://twitch.tv/{{$value.Channel}}" target="_blank">{{$value.Channel}}</a>
                 </div>

@@ -3,7 +3,7 @@ package irc
 import (
 	"fmt"
 
-	"github.com/gempir/go-twitch-irc"
+	"github.com/gempir/go-twitch-irc/v2"
 )
 
 func textParser(message twitch.PrivateMessage) (answer string) {

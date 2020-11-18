@@ -1,7 +1,7 @@
 package routers
 
 import (
-	"twitchchatrelay/controllers"
+	"twitchChatRelay/controllers"
 
 	"github.com/astaxie/beego"
 )

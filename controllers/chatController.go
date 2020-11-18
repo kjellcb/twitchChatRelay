@@ -2,7 +2,7 @@ package controllers
 
 import (
 	"github.com/astaxie/beego"
-	"github.com/gempir/go-twitch-irc"
+	"github.com/gempir/go-twitch-irc/v2"
 )
 
 type ChatController struct {

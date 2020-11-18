@@ -2,9 +2,9 @@ package irc
 
 import (
 	"fmt"
-	"twitchchatrelay/controllers"
+	"twitchChatRelay/controllers"
 
-	"github.com/gempir/go-twitch-irc"
+	"github.com/gempir/go-twitch-irc/v2"
 )
 
 var Bot Configuration
@@ -13,6 +13,7 @@ type Configuration struct {
 	Client *twitch.Client
 	Cred   Credentials
 	Chan   []string
+	Relay  string
 }
 
 type Credentials struct {
@@ -27,12 +28,6 @@ type Channels struct {
 
 func init() {
 	Bot.Cred.IsAuth = true
-	Bot.Cred.User = ""
-	Bot.Cred.Token = ""
-	Bot.Chan = []string{
-		"mancert",
-		"icelandicice",
-	}
 }
 
 func ConnectTwitch() (err error) {
@@ -45,14 +40,15 @@ func ConnectTwitch() (err error) {
 		if message.User.Name != "streamelements" {
 			controllers.Data = append(controllers.Data, message)
 		}
-
-		if message.Channel == Bot.Chan[1] {
-			messageToRelay := fmt.Sprintf("C: %s - U: %s - M: %s", message.Channel, message.User.Name, message.Message)
-			Bot.Client.Say(Bot.Chan[0], messageToRelay)
-		}
-		if message.Channel == Bot.Chan[0] {
-			messageToRelay := fmt.Sprintf("C: %s - U: %s - M: %s", message.Channel, message.User.Name, message.Message)
-			Bot.Client.Say(Bot.Chan[1], messageToRelay)
+		if Bot.Relay == "on" {
+			if message.Channel == Bot.Chan[1] {
+				messageToRelay := fmt.Sprintf("C: %s - U: %s - M: %s", message.Channel, message.User.Name, message.Message)
+				Bot.Client.Say(Bot.Chan[0], messageToRelay)
+			}
+			if message.Channel == Bot.Chan[0] {
+				messageToRelay := fmt.Sprintf("C: %s - U: %s - M: %s", message.Channel, message.User.Name, message.Message)
+				Bot.Client.Say(Bot.Chan[1], messageToRelay)
+			}
 		}
 		if answer != "" {
 			Bot.Client.Say(message.Channel, answer)
@@ -65,6 +61,7 @@ func ConnectTwitch() (err error) {
 	return
 }
 
+// to be done
 func relayMessage(channelIn string, channelOut string, message twitch.PrivateMessage) {
-
+	return
 }
